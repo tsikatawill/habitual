@@ -6,7 +6,6 @@ import useBottomSheet from "../hooks/useBottomSheet";
 
 const AddHabit = (props) => {
   const updateContent = useModal((state) => state.updateContent);
-  const openModal = useModal((state) => state.openModal);
   const { handlePresentModal } = useBottomSheet();
 
   return (
@@ -15,7 +14,6 @@ const AddHabit = (props) => {
       {...props}
       onPress={() => {
         updateContent(<NewHabit />);
-        openModal();
         handlePresentModal();
       }}
     >

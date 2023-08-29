@@ -1,31 +1,22 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useModal } from "../store/useStore";
 
 const useBottomSheet = () => {
   const bottomSheetRef = useRef(null);
   const isOpen = useModal((state) => state.isOpen);
-
-  const [showModal, setShowModal] = useState(false);
-
-  const handleDismiss = () => {
-    setShowModal(false);
-  };
+  const openModal = useModal((state) => state.openModal);
 
   const handlePresentModal = useCallback(() => {
+    openModal();
     bottomSheetRef.current?.present();
-  }, [isOpen]);
+  }, [isOpen, bottomSheetRef]);
 
   useEffect(() => {
-    if (isOpen) {
-      bottomSheetRef.current?.present();
-    }
+    if (isOpen) handlePresentModal();
   }, [isOpen]);
 
   return {
     bottomSheetRef,
-    showModal,
-    setShowModal,
-    handleDismiss,
     handlePresentModal,
   };
 };

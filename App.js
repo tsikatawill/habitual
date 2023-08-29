@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text } from "react-native";
+import { Button, ScrollView, StyleSheet, Text } from "react-native";
 import CustomBottomSheet from "./components/CustomBottomSheet";
 import { useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -11,20 +11,16 @@ import useBottomSheet from "./hooks/useBottomSheet";
 
 export default function App() {
   const updateContent = useModal((state) => state.updateContent);
-  const isOpen = useModal((state) => state.isOpen);
-  const handleDismiss = useModal((state) => state.handleDismiss);
-  const updateRef = useModal((state) => state.updateRef);
 
   const { bottomSheetRef } = useBottomSheet();
 
   useEffect(() => {
     const handleModalInitials = () => {
-      updateRef(bottomSheetRef);
       updateContent(<Text>Initial Modal Content</Text>);
     };
 
     handleModalInitials();
-  }, [bottomSheetRef]);
+  }, []);
 
   return (
     <>
@@ -39,11 +35,7 @@ export default function App() {
         </FontsProvider>
       </SafeAreaView>
 
-      <CustomBottomSheet
-        ref={bottomSheetRef}
-        handleDismiss={handleDismiss}
-        showModal={isOpen}
-      />
+      <CustomBottomSheet ref={bottomSheetRef} />
     </>
   );
 }

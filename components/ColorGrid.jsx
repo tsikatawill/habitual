@@ -1,4 +1,9 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+} from "react-native";
 import { COLORS } from "../lib/colors";
 
 const ColorGrid = ({ handleColorSelect, selectedColor }) => {
@@ -25,7 +30,7 @@ const ColorGrid = ({ handleColorSelect, selectedColor }) => {
         >
           {item === selectedColor && (
             <Text style={{ fontWeight: "bold", fontSize: 15, color: "white" }}>
-              &#x2713;
+              ●{/* &#x2713; */}
             </Text>
           )}
         </TouchableOpacity>

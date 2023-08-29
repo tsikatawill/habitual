@@ -15,7 +15,7 @@ const HabitCard = ({ color, icon, habit, ignoreCount = false }) => {
 
   return (
     <TouchableOpacity
-      onPress={() => {
+      onLongPress={() => {
         setCount((prev) => prev + 1);
       }}
       style={{
@@ -46,13 +46,13 @@ const HabitCard = ({ color, icon, habit, ignoreCount = false }) => {
           alignItems: "center",
         }}
       >
-        <FontAwesome name={icon} size={40} color={colors.icon} />
+        <FontAwesome name={icon} size={30} color={colors.icon} />
       </View>
 
       <CustomText
         style={{
           color: colors.text,
-          fontFamily: "ProductSansB",
+          fontFamily: "ProductSansR",
           fontSize: 16,
           textAlign: "center",
         }}

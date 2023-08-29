@@ -1,7 +1,13 @@
 import "react-native-get-random-values";
 
 import { useState } from "react";
-import { View, TouchableOpacity, TextInput, StyleSheet } from "react-native";
+import {
+  View,
+  TouchableOpacity,
+  TextInput,
+  StyleSheet,
+  Alert,
+} from "react-native";
 import HabitCard from "./HabitCard";
 import { v4 as uuidv4 } from "uuid";
 import { useHabits, useModal } from "../store/useStore";
@@ -22,15 +28,33 @@ const NewHabit = () => {
   const resetContent = useModal((state) => state.resetContent);
   const handleDismiss = useModal((state) => state.handleDismiss);
 
+  const valid = Object.entries(habit).every(
+    ([key, value]) => value.trim() !== ""
+  );
+
+  const alertUser = () =>
+    Alert.alert("Required field", "Habit field cannot be empty", [
+      {
+        text: "Cancel",
+        onPress: () => console.log("Cancel Pressed"),
+        // style: "cancel",
+      },
+      { text: "OK" },
+    ]);
+
   const handleSave = () => {
     const newHabit = {
       id: uuidv4(),
       ...habit,
     };
 
-    addHabit(newHabit);
-    resetContent();
-    handleDismiss();
+    if (valid) {
+      addHabit(newHabit);
+      resetContent();
+      handleDismiss();
+    } else {
+      alertUser();
+    }
   };
 
   return (

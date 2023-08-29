@@ -12,16 +12,12 @@ import Container from "./Container";
 import { useModal } from "../store/useStore";
 
 const CustomBottomSheet = forwardRef((_props, ref) => {
-  const snapPoints = ["95%"];
-
   const content = useModal((state) => state.content);
   const isOpen = useModal((state) => state.isOpen);
   const resetContent = useModal((state) => state.resetContent);
   const handleDismiss = useModal((state) => state.handleDismiss);
 
-  useEffect(() => {
-    if (!isOpen) handleDismiss();
-  }, [isOpen]);
+  const snapPoints = ["48%", "90%"];
 
   return (
     <GestureHandlerRootView
@@ -40,7 +36,7 @@ const CustomBottomSheet = forwardRef((_props, ref) => {
               resetContent();
               handleDismiss();
             }}
-            index={0}
+            index={1}
             backgroundStyle={styles.modal}
           >
             <Container>{content}</Container>
@@ -53,7 +49,6 @@ const CustomBottomSheet = forwardRef((_props, ref) => {
 
 const styles = StyleSheet.create({
   inner: {
-    zIndex: 100,
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
@@ -61,6 +56,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+    zIndex: 100,
     position: "absolute",
   },
   modal: {
